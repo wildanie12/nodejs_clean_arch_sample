@@ -8,12 +8,12 @@ class UserModel {
 
     create = async (data) => {
         const tx = await this.collection.insertOne(data)
-        return data
+        return tx
     }
 
     update = async (data, query) => {
         const tx = await this.collection.updateOne(query, update)
-        return data
+        return tx
     }
 
     delete = async (query) => {
@@ -23,12 +23,12 @@ class UserModel {
 
     createMany = async (data) => {
         const tx = await this.collection.insertMany(data)
-        return data
+        return tx
     }
 
     updateMany = async (data, query) => {
         const tx = await this.collection.updateMany(query, update)
-        return data
+        return tx
     }
 
     deleteMany = async (query) => {
