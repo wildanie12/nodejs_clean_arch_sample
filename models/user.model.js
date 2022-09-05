@@ -1,9 +1,18 @@
-const mongo = require('../database/mongo')
+const mongo = require("../database/mongo")
 
 class UserModel {
-
     constructor() {
-        this.collection = mongo.db.collection('user')
+        this.collection = mongo.db.collection("user")
+    }
+
+    findAll = async (query = {}) => {
+        const tx = this.collection.find(query)
+        return tx
+    }
+
+    find = async (query) => {
+        const tx = this.collection.findOne(query)
+        return tx
     }
 
     create = async (data) => {
