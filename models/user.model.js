@@ -7,12 +7,12 @@ class UserModel {
     }
 
     create = async (data) => {
-        const data = await this.collection.insertOne(data)
+        const tx = await this.collection.insertOne(data)
         return data
     }
 
     update = async (data, query) => {
-        const data = await this.collection.updateOne(query, update)
+        const tx = await this.collection.updateOne(query, update)
         return data
     }
 
@@ -22,12 +22,12 @@ class UserModel {
     }
 
     createMany = async (data) => {
-        const data = await this.collection.insertMany(data)
+        const tx = await this.collection.insertMany(data)
         return data
     }
 
     updateMany = async (data, query) => {
-        const data = await this.collection.updateMany(query, update)
+        const tx = await this.collection.updateMany(query, update)
         return data
     }
 
