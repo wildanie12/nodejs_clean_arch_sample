@@ -3,8 +3,20 @@ const express = require("express")
 const UserEntity = require("../../../entities/user.entity")
 const userService = require("../../../services/user.service")
 
+/**
+ *
+ * @param {express.Request} req
+ * @param {express.Response} res
+ * @returns
+ */
 const index = async (req, res) => {}
 
+/**
+ *
+ * @param {express.Request} req
+ * @param {express.Response} res
+ * @returns
+ */
 const show = async (req, res) => {}
 
 /**
@@ -47,8 +59,20 @@ const store = async (req, res) => {
     }
 }
 
+/**
+ *
+ * @param {express.Request} req
+ * @param {express.Response} res
+ * @returns
+ */
 const update = async (req, res) => {}
 
+/**
+ *
+ * @param {express.Request} req
+ * @param {express.Response} res
+ * @returns
+ */
 const destroy = async (req, res) => {}
 
 module.exports = { index, show, store, update, destroy }
