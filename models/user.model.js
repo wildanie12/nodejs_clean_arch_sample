@@ -11,8 +11,8 @@ class UserModel {
     }
 
     find = async (query) => {
-        const tx = this.collection.findOne(query)
-        return tx
+        const data = await this.collection.findOne(query)
+        return data
     }
 
     create = async (data) => {
