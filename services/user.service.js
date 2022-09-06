@@ -1,3 +1,4 @@
+const { ObjectId } = require("mongodb")
 const UserEntity = require("../entities/user.entity")
 const UserModel = require("../models/user.model")
 
@@ -20,6 +21,20 @@ const list = async () => {
 }
 
 /**
+ * Get single user
+ *
+ * @param {string} userID
+ * @returns
+ */
+const show = async (userID) => {
+    const userObjectID = ObjectId.createFromHexString(userID)
+    const user = await userModel.find({ _id: userObjectID })
+
+    const userEntity = new UserEntity(user)
+    return user
+}
+
+/**
  * Create user resource
  *
  * @param {UserEntity} userEntity
@@ -33,4 +48,4 @@ const create = async (userEntity) => {
     }
 }
 
-module.exports = { create, list }
+module.exports = { create, list, show }
