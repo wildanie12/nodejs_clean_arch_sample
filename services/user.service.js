@@ -3,6 +3,11 @@ const UserModel = require("../models/user.model")
 
 const userModel = new UserModel()
 
+/**
+ * Find all user
+ *
+ * @returns {UserEntity}
+ */
 const list = async () => {
     const users = await userModel.findAll()
     const entities = []
@@ -15,6 +20,7 @@ const list = async () => {
 }
 
 /**
+ * Create user resource
  *
  * @param {UserEntity} userEntity
  */
