@@ -7,7 +7,7 @@ class HttpError extends Error {
      */
     constructor(message, attribute = { code: 500, filename: "" }) {
         super(message)
-        this.name = "ERROR_HTTP"
+        this.name = "AppHTTPError"
         this.code = attribute.code
         this.filename = attribute.filename
     }
