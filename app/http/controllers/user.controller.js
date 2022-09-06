@@ -1,7 +1,10 @@
 const express = require("express")
 
 const UserEntity = require("../../../entities/user.entity")
+const HttpError = require("../../../entities/common/http.error")
+
 const userService = require("../../../services/user.service")
+const errorHelper = require("../helpers/error.helper")
 
 /**
  *
@@ -33,7 +36,23 @@ const index = async (req, res) => {
  * @param {express.Response} res
  * @returns
  */
-const show = async (req, res) => {}
+const show = async (req, res) => {
+    try {
+        const userID = req.params.userID
+
+        if (!userID) throw new HttpError("User ID is invalid", { code: 400, filename: "user.controller.js" })
+
+        const data = await userService.show(userID)
+        return res.status(200).json({
+            status: "ok",
+            code: 200,
+            message: "success getting a single user",
+            data,
+        })
+    } catch (err) {
+        return errorHelper.mapErrorResponse(err, res)
+    }
+}
 
 /**
  *
