@@ -1,5 +1,6 @@
 const mongo = require("../database/mongo")
 
+const objectHelper = require("../app/http/helpers/object.helper")
 class UserModel {
     constructor() {
         this.collection = mongo.db.collection("user")
@@ -21,7 +22,9 @@ class UserModel {
     }
 
     update = async (data, query) => {
-        const tx = await this.collection.updateOne(query, update)
+        const sanitized = objectHelper.compactNested(data)
+
+        const tx = await this.collection.findOneAndUpdate(query, { $set: sanitized })
         return tx
     }
 
