@@ -1,4 +1,5 @@
 const { ObjectId } = require("mongodb")
+const HttpError = require("../entities/common/http.error")
 const UserEntity = require("../entities/user.entity")
 const UserModel = require("../models/user.model")
 
@@ -49,4 +50,18 @@ const create = async (userEntity) => {
     }
 }
 
-module.exports = { create, list, show }
+/**
+ * Update user resource by ID
+ *
+ * @param {UserEntity} userEntity user entity payload to update
+ * @param {string} id id user to update
+ * @returns {Object} object
+ */
+const update = async (userEntity, id) => {
+    const update = await userModel.update(userEntity, { _id: ObjectId.createFromHexString(id) })
+    if (!update.ok) throw new HttpError("Cannot update user data", { code: 500, filename: "user.service.js" })
+
+    return { id: update.value._id }
+}
+
+module.exports = { create, list, show, update }
