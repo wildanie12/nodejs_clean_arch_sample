@@ -100,7 +100,36 @@ const store = async (req, res) => {
  * @param {express.Response} res
  * @returns
  */
-const update = async (req, res) => {}
+const update = async (req, res) => {
+    try {
+        const id = req.params.userID
+        if (!id) throw new HttpError("userID is invalid", { code: 400, filename: "user.controller.js" })
+
+        const { name, username, email, address_province, address_city, address_district, address_subdistrict } = req.body
+        const userInput = new UserEntity({
+            name,
+            username,
+            email,
+            address: {
+                province: address_province,
+                city: address_city,
+                district: address_district,
+                subdistrict: address_subdistrict,
+            },
+        })
+
+        const data = await userService.update(userInput, id)
+        return res.json({
+            status: "ok",
+            code: 200,
+            message: "User successfully updated",
+            data,
+        })
+    } catch (err) {
+        console.error(err)
+        return errorHelper.mapErrorResponse(err, res)
+    }
+}
 
 /**
  *
