@@ -1,10 +1,8 @@
-
-
 class User {
-    
     constructor(object = false) {
         if (object) {
-            const { name, username, email, address, skill } = object
+            const { name, username, email, address, skill, id } = object
+            this.id = id
             this.name = name
             this.username = username
             this.email = email
