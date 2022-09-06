@@ -15,6 +15,7 @@ const list = async () => {
 
     // Mapping to list of entities
     await users.forEach((item) => {
+        item.id = item._id
         entities.push(new UserEntity(item))
     })
     return entities
