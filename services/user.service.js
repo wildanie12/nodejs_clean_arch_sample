@@ -3,6 +3,17 @@ const UserModel = require("../models/user.model")
 
 const userModel = new UserModel()
 
+const list = async () => {
+    const users = await userModel.findAll()
+    const entities = []
+
+    // Mapping to list of entities
+    await users.forEach((item) => {
+        entities.push(new UserEntity(item))
+    })
+    return entities
+}
+
 /**
  *
  * @param {UserEntity} userEntity
@@ -16,4 +27,4 @@ const create = async (userEntity) => {
     }
 }
 
-module.exports = { create }
+module.exports = { create, list }
