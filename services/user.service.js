@@ -64,4 +64,13 @@ const update = async (userEntity, id) => {
     return { id: update.value._id }
 }
 
-module.exports = { create, list, show, update }
+const destroy = async (id) => {
+    const data = await userModel.delete({ _id: ObjectId.createFromHexString(id) })
+    if (!data.value) {
+        throw new HttpError("cannot find user with id: " + id, { code: 400, filename: "user.service.js" })
+    }
+
+    return { id: data.value._id }
+}
+
+module.exports = { create, list, show, update, destroy }
