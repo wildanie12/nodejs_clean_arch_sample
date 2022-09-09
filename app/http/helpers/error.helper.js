@@ -16,17 +16,24 @@ const mapErrorResponse = (err, res) => {
                 message: err.message,
             })
         case "BSONTypeError":
-            console.error(err)
             return res.status(400).json({
                 status: "error",
                 code: 400,
                 message: err.message,
             })
+        case "MongoServerSelectionError":
+            const code = 500
+            return res.status(code).json({
+                status: "error",
+                code,
+                message: err.message,
+            })
         default:
+            console.log(err)
             return res.json({
                 status: "error",
                 code: err.code,
-                message: err.name,
+                message: err.message,
             })
     }
 }
