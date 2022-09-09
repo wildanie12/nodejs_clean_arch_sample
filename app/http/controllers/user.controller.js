@@ -137,6 +137,21 @@ const update = async (req, res) => {
  * @param {express.Response} res
  * @returns
  */
-const destroy = async (req, res) => {}
+const destroy = async (req, res) => {
+    try {
+        const userID = req.params.userID
+        if (!userID) throw new HttpError("userID is invalid", { code: 400, filename: "user.controller.js" })
+
+        const data = await userService.destroy(userID)
+        return res.json({
+            status: "ok",
+            message: "User has been sucessfully deleted",
+            data,
+        })
+    } catch (err) {
+        console.log(err)
+        return errorHelper.mapErrorResponse(err, res)
+    }
+}
 
 module.exports = { index, show, store, update, destroy }
