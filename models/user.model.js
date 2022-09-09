@@ -62,7 +62,7 @@ class UserModel {
      * @returns
      */
     delete = async (query) => {
-        const result = await this.collection.deleteOne(query)
+        const result = await this.collection.findOneAndDelete(query)
         return result
     }
 
